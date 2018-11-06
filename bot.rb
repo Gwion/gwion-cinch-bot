@@ -11,8 +11,7 @@ bot = Cinch::Bot.new do
     c.user = 'GwionBot'
     c.nick = 'gwion'
     c.realname = 'I\'m a cinch bot that talks Gwion language.'
-    c.channels = ['#gwion_lang']
-#    c.channels = ['#gwion_lang', '#proglangdesign']
+    c.channels = ['#gwion_lang', '#proglangdesign']
 
   end
 
