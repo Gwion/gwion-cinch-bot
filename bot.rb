@@ -5,6 +5,8 @@ require 'cinch'
 
 bot = Cinch::Bot.new do
   configure do |c|
+    c.sasl.username = 'gwion_bot'
+    c.sasl.password = 'gwion_bot'
     c.server = 'irc.freenode.net'
     c.user = 'GwionBot'
     c.nick = 'GwionBotNick'
