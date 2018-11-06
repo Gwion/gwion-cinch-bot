@@ -10,19 +10,24 @@ bot = Cinch::Bot.new do
     c.server = 'irc.freenode.net'
     c.user = 'GwionBot'
     c.nick = 'GwionBot'
-    c.realname = 'GwionBotRealName'
-    c.channels = ['#bot_test']
+    c.realname = 'I\'m a cinch gwion that talks Gwion language.'
+    c.channels = ['#gwion_lang', '#proglangdesign']
 
   end
 
   on :dcc_send  do |m|
-  m.reply "I don't known what to do yet"
+  m.reply "I don't known what to do yet, sorry."
+# we need a way to get file.
+#  m.reply "/dcc accept #{m.user}"
   end
 
   on :message  do |m|
     if m.action? then return end
     if m.ctcp? then return end
-    File.write('file.gw', m.message.gsub('GwionBot', ''))
+    message = m.message.gsub('GwionBot', '')
+    if message[0] != ':' then return end
+    message = message[1..-1]
+    File.write('file.gw', message)
     reply = `gwion/gwion file.gw 2>&1 | bash ./remove_colors.sh`
     m.reply reply
   end
