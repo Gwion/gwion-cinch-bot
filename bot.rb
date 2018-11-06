@@ -9,7 +9,7 @@ bot = Cinch::Bot.new do
     c.sasl.password = 'm2p2gwion_bot'
     c.server = 'irc.freenode.net'
     c.user = 'GwionBot'
-    c.nick = 'GwionBotNick'
+    c.nick = 'GwionBot'
     c.realname = 'GwionBotRealName'
     c.channels = ['#bot_test']
 
