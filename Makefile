@@ -1,1 +1,2 @@
-make -C gwion
+all:
+	make -C gwion
