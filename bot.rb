@@ -11,7 +11,8 @@ bot = Cinch::Bot.new do
     c.user = 'GwionBot'
     c.nick = 'gwion'
     c.realname = 'I\'m a cinch bot that talks Gwion language.'
-    c.channels = ['#gwion_lang', '#proglangdesign']
+    c.channels = ['#gwion_lang']
+#    c.channels = ['#gwion_lang', '#proglangdesign']
 
   end
 
@@ -24,7 +25,7 @@ bot = Cinch::Bot.new do
   on :message  do |m|
     if m.action? then return end
     if m.ctcp? then return end
-    message = m.message.gsub('GwionBot', '')
+    message = m.message.gsub('gwion', '')
     if message[0] != ':' then return end
     message = message[1..-1]
     File.write('file.gw', message)
