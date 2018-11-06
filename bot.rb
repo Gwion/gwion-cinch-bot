@@ -15,12 +15,15 @@ bot = Cinch::Bot.new do
 
   end
 
-#  on :message, "hello" do |m|
-  on :message do |m|
-    m.reply "Why hello there."
-    File.write('file.gw', m.message)
-#    reply = `gwion file.gw 2>&1 | sed "s/\x1B\[[0-9;]\+[A-Za-z]//g"`
-    reply = `gwion/gwion gwion file.gw 2>&1 | bash ./remove_colors.sh`
+  on :dcc_send  do |m|
+  m.reply "tu m'envoie un truc?"
+  end
+
+  on :message  do |m|
+# if m.action? then return end
+#  if m.ctcp? then return end
+    File.write('file.gw', m.message.gsub('GwionBot', ''))
+    reply = `gwion/gwion file.gw 2>&1 | bash ./remove_colors.sh`
     m.reply reply
   end
 end
