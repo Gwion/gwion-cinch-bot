@@ -1,2 +1,11 @@
-source 'https://rubygems.org'
-gem 'minitest-autotest'
+GEM
+  remote: https://rubygems.org/
+  specs:
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+
+BUNDLED WITH
+   1.17.1
