@@ -9,8 +9,8 @@ bot = Cinch::Bot.new do
     c.sasl.password = 'm2p2gwion_bot'
     c.server = 'irc.freenode.net'
     c.user = 'GwionBot'
-    c.nick = 'GwionBot'
-    c.realname = 'I\'m a cinch gwion that talks Gwion language.'
+    c.nick = 'gwion'
+    c.realname = 'I\'m a cinch bot that talks Gwion language.'
     c.channels = ['#gwion_lang', '#proglangdesign']
 
   end
@@ -34,4 +34,3 @@ bot = Cinch::Bot.new do
 end
 
 bot.start
-
