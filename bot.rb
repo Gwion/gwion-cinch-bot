@@ -12,24 +12,25 @@ bot = Cinch::Bot.new do
     c.nick = 'gwion'
     c.realname = 'I\'m a cinch bot that talks Gwion language.'
     c.channels = ['#gwion_lang', '#proglangdesign']
-
   end
 
-  on :dcc_send  do |m|
-  m.reply "I don't known what to do yet, sorry."
+#  on :dcc_send  do |m|
+#  m.reply "I don't known what to do yet, sorry."
 # we need a way to get file.
 #  m.reply "/dcc accept #{m.user}"
-  end
+#  end
 
   on :message  do |m|
     if m.action? then return end
     if m.ctcp? then return end
-    message = m.message.gsub('gwion', '')
-    if message[0] != ':' then return end
-    message = message[1..-1]
-    File.write('file.gw', message)
-    reply = `gwion/gwion file.gw 2>&1 | bash ./remove_colors.sh`
-    m.reply reply
+#   if message[0..5] != 'gwion:' then return end
+#    if message[0] != ':' then return end
+    if m.message =~ /^gwion:/ then 
+      message = m.message.gsub('gwion:', '')
+      File.write('file.gw', message)
+      reply = `gwion/gwion file.gw 2>&1 | bash ./remove_colors.sh`
+      m.reply reply
+    end
   end
 end
 
