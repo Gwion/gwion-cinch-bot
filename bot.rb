@@ -1,7 +1,7 @@
-# This is the actual bot config and command logic 
 #! /usr/bin/env ruby
 
 require 'cinch'
+require "tempfile"
 
 bot = Cinch::Bot.new do
   configure do |c|
@@ -15,17 +15,25 @@ bot = Cinch::Bot.new do
     c.channels = ['#gwion_lang']
   end
 
-#  on :dcc_send  do |m|
-#  m.reply "I don't known what to do yet, sorry."
-# we need a way to get file.
-#  m.reply "/dcc accept #{m.user}"
-#  end
+  on :dcc_send, method: :incoming_dcc do |m, dcc|
+    if dcc.from_private_ip? || dcc.from_localhost? then
+      @bot.loggers.debug "Not accepting potentially dangerous file transfer"
+      m.reply "test"
+    else
+      m.reply "You want me to receive " + dcc.filename
+      t = File.open('dcc.gw', 'w')
+      dcc.accept(t)
+      t.close
+      reply = `gwion/gwion dcc.gw 2>&1 | bash ./remove_colors.sh`
+      m.reply reply
+    end
+  end
 
   on :message  do |m|
-    if m.action? then return end
-    if m.ctcp? then return end
-#   if message[0..5] != 'gwion:' then return end
-#    if message[0] != ':' then return end
+    if m.action? then end
+    if m.ctcp? then end
+    if m.message[0..5] != 'gwion:' then end
+    if m.message[0] != ':' then end
     if m.message =~ /^gwion:/ then 
       message = m.message.gsub('gwion:', '')
       File.write('file.gw', message)
