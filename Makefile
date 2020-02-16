@@ -1,4 +1,3 @@
 all:
-	ls -a
-	git submodule update --init
-	make -C gwion
+	git clone --recursive https://github.com/fennecdjay/Gwion
+	make -C Gwion

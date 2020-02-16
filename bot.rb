@@ -24,7 +24,7 @@ bot = Cinch::Bot.new do
       t = File.open('dcc.gw', 'w')
       dcc.accept(t)
       t.close
-      reply = `gwion/gwion dcc.gw 2>&1 | bash ./remove_colors.sh`
+      reply = `Gwion/gwion dcc.gw 2>&1 | bash ./remove_colors.sh`
       m.reply reply
     end
   end
@@ -37,7 +37,7 @@ bot = Cinch::Bot.new do
     if m.message =~ /^gwion:/ then 
       message = m.message.gsub('gwion:', '')
       File.write('file.gw', message)
-      reply = `gwion/gwion file.gw 2>&1 | bash ./remove_colors.sh`
+      reply = `Gwion/gwion file.gw 2>&1 | bash ./remove_colors.sh`
       m.reply reply
     end
   end
