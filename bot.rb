@@ -9,10 +9,9 @@ bot = Cinch::Bot.new do
     c.sasl.password = 'm2p2gwion_bot'
     c.server = 'irc.freenode.net'
     c.user = 'GwionBot'
-    c.nick = 'gwion'
+    c.nick = 'gwionbot'
     c.realname = 'I\'m a cinch bot that talks Gwion language.'
-#    c.channels = ['#gwion_lang', '#proglangdesign']
-    c.channels = ['#gwion_lang']
+    c.channels = ['#gwion_lang', '#proglangdesign']
   end
 
   on :dcc_send, method: :incoming_dcc do |m, dcc|
