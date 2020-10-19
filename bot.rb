@@ -11,7 +11,8 @@ bot = Cinch::Bot.new do
     c.user = 'GwionBot'
     c.nick = 'gwionbot'
     c.realname = 'I\'m a cinch bot that talks Gwion language.'
-    c.channels = ['#gwion_lang', '#proglangdesign']
+#    c.channels = ['#gwion_lang', '#proglangdesign']
+    c.channels = ['#gwion_lang']
   end
 
   on :dcc_send, method: :incoming_dcc do |m, dcc|
@@ -31,13 +32,14 @@ bot = Cinch::Bot.new do
   on :message  do |m|
     if m.action? then end
     if m.ctcp? then end
-    talkinToMe = bot.nick + ':'
-    if m.message[0..5] != talkinToMe then end
+    if m.message[0..5] != 'gwionbot:' then end
     if m.message[0] != ':' then end
-    message = m.message.gsub(talkinToMe, '')
-    File.write('file.gw', message)
-    reply = `Gwion/gwion file.gw 2>&1 | bash ./remove_colors.sh`
-    m.reply reply
+    if m.message =~ /^gwionbot:/ then 
+      message = m.message.gsub('gwionbot:', '')
+      File.write('file.gw', message)
+      reply = `Gwion/gwion file.gw 2>&1 | bash ./remove_colors.sh`
+      m.reply reply
+    end
   end
 end
 
