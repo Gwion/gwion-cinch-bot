@@ -31,15 +31,13 @@ bot = Cinch::Bot.new do
   on :message  do |m|
     if m.action? then end
     if m.ctcp? then end
-    talkinToMe = c.nick + ":"
-    if m.message[0..talkinToMe.length] != TalkinToMe then end
+    talkinToMe = bot.nick + ':'
+    if m.message[0..5] != talkinToMe then end
     if m.message[0] != ':' then end
-    if m.message =~ "/^" + talkinToMe ":/" then 
-      message = m.message.gsub(talkinToMe, '')
-      File.write('file.gw', message)
-      reply = `Gwion/gwion file.gw 2>&1 | bash ./remove_colors.sh`
-      m.reply reply
-    end
+    message = m.message.gsub(talkinToMe, '')
+    File.write('file.gw', message)
+    reply = `Gwion/gwion file.gw 2>&1 | bash ./remove_colors.sh`
+    m.reply reply
   end
 end
 
